@@ -24,6 +24,7 @@ def fib_recursive(num):
         return fib_recursive(num - 1) + fib_recursive(num - 2)
 
 
+<<<<<<< HEAD
 #def fib_iterative(num):
 
 
