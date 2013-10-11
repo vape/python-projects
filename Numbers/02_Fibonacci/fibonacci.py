@@ -24,9 +24,6 @@ def fib_recursive(num):
         return fib_recursive(num - 1) + fib_recursive(num - 2)
 
 
-#def fib_iterative(num):
-
-
 def main():
     try:
         target = min(10000, int(input('Enter target number [0, 1500]: ')))
