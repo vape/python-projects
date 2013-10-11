@@ -23,6 +23,7 @@ def fib_recursive(num):
     else:
         return fib_recursive(num - 1) + fib_recursive(num - 2)
 
+#def fib_iterative(num):
 
 def main():
     try:
