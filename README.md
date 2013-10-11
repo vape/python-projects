@@ -6,3 +6,6 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 - [Find PI to the Nth Digit](https://github.com/vape/python-projects/blob/master/Numbers/01_Pi/pi.py): Enter a number and have the program generate PI up to that many decimal
 places. Keep a limit to how far the program will go.
+
+- [Fibonacci Sequence](https://github.com/vape/python-projects/blob/master/Numbers/02_Fibonacci/fibonacci.py): Enter a number and have the program generate the Fibonacci sequence to that number or to the Nth number. (I did it a little differently. See README of that solution for specifics.)
+
