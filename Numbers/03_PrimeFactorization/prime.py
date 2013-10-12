@@ -1,7 +1,39 @@
 from math import sqrt
+from profilehooks import profile
+
+
+@profile()
+def generate_primes(max_num):
+    """
+    Generates a list of primes using the
+    `Sieve of Eratosthenes <http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes>`_ method.
+    :param max_num: Max value to use in the sieve
+    :return: list of primes up to max_num
+    """
+    rng = list(range(2, max_num+1))
+    if max_num <= 3:
+        return list(range(2, max_num+1))
+
+    p = 2
+    while p <= max_num:
+        p_increments = list(range(p, max_num, p))
+        if len(p_increments) <= 1:
+            break
+        for i in p_increments:
+            if rng[i-2] != p:
+                rng[i-2] = 0
+        p += 1
+
+    return [v for v in rng if v != 0]
 
 
 def primes():
+    """
+    A generator which yields primes using a naive algorithm.
+    Increments numbers and checks if the number is prime
+    using the is_prime method.
+
+    """
     current = 2
     while True:
         if is_prime(current):
@@ -9,6 +41,7 @@ def primes():
         current += 1
 
 
+@profile
 def is_prime(num):
     if num in (0, 1):
         return False
@@ -26,6 +59,7 @@ def is_prime(num):
     return True
 
 
+@profile
 def factor_primes(num):
     if is_prime(num):
         return [num]
