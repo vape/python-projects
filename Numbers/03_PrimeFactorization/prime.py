@@ -1,8 +1,6 @@
 from math import sqrt
-from profilehooks import profile
 
 
-@profile()
 def generate_primes(max_num):
     """
     Generates a list of primes using the
@@ -41,7 +39,6 @@ def primes():
         current += 1
 
 
-@profile
 def is_prime(num):
     if num in (0, 1):
         return False
@@ -59,7 +56,6 @@ def is_prime(num):
     return True
 
 
-@profile
 def factor_primes(num):
     if is_prime(num):
         return [num]
