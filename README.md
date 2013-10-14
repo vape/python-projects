@@ -12,3 +12,5 @@ places. Keep a limit to how far the program will go.
 - [Prime Factorization](https://github.com/vape/python-projects/blob/master/Numbers/03_PrimeFactorization/prime.py): Have the user enter a number and find all Prime Factors (if there are any) and display them.
 
 - [Next Prime Number](https://github.com/vape/python-projects/blob/master/Numbers/04_NextPrime/nextprime.py): Have the program find prime numbers until the user chooses to stop the asking for the next one.
+
+- [Mortgage Calculator](https://github.com/vape/python-projects/blob/master/Numbers/06_MortgageCalculator/mortgage.py): Calculate the monthly payments of a fixed term mortgage over given Nth terms at a given interest rate. Also figure out how long it will take the user to pay back the loan. (I had no idea what these two sentences mean, so I just made a simple mortgage calculator.)
