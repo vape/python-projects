@@ -14,3 +14,5 @@ places. Keep a limit to how far the program will go.
 - [Next Prime Number](https://github.com/vape/python-projects/blob/master/Numbers/04_NextPrime/nextprime.py): Have the program find prime numbers until the user chooses to stop the asking for the next one.
 
 - [Mortgage Calculator](https://github.com/vape/python-projects/blob/master/Numbers/06_MortgageCalculator/mortgage.py): Calculate the monthly payments of a fixed term mortgage over given Nth terms at a given interest rate. Also figure out how long it will take the user to pay back the loan. (I had no idea what these two sentences mean, so I just made a simple mortgage calculator.)
+
+- [Change Return Program](https://github.com/vape/python-projects/blob/master/Numbers/07_ChangeCalculator/change.py): The user enters a cost and then the amount of money given. The program will figure out the change and the number of quarters, dimes, nickels, pennies needed for the change.
