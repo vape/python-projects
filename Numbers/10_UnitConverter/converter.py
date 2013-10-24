@@ -1,15 +1,23 @@
 class UnsupportedUnitException(BaseException):
     def __init__(self, unit):
-        self.unit = unit
+        self._unit = unit
 
     @property
     def unit(self):
-        return self.unit
+        return self._unit
 
 class DifferentUnitsException(BaseException):
     def __init__(self, cat1, cat2):
         self._cat1 = cat1
         self._cat2 = cat2
+
+    @property
+    def cat1(self):
+        return self._cat1
+
+    @property
+    def cat2(self):
+        return self._cat2
 
 categories = [
     {
@@ -63,29 +71,27 @@ def find_category(unit):
     for c in categories:
         if [u for u in c['units'] if u['name'] == unit]:
             return c
-    return ''
+    raise UnsupportedUnitException(unit)
 
 
 def get_unit(category, unit):
     return [u for u in category['units'] if u['name'] == unit][0]
 
+
 def convert_value(value, src_unit_name, target_unit_name):
     src_cat, target_cat = find_category(src_unit_name), find_category(target_unit_name)
     if src_cat != target_cat:
-        raise DifferentUnitsException(src_cat, target_cat)
+        raise DifferentUnitsException(src_cat['name'], target_cat['name'])
 
     src_unit = get_unit(src_cat, src_unit_name)
     target_unit = get_unit(src_cat, target_unit_name)
 
-    value_in_base_unit = value * src_unit['val_in_base']
-
-    return value_in_base_unit / target_unit['val_in_base']
+    return (value * src_unit['val_in_base']) / target_unit['val_in_base']
 
 
 def main():
-    cat_names = [c['name'] for c in categories]
-    print('Hello! With this calculator you can convert units of {0}.'.format(', '.join(cat_names)))
-    src_val, src_unit, target_unit = input('Please enter source value, source unit and unit to convert to [e.g. 100 m km]:').split(' ')
+    print('Hello! With this calculator you can convert units of {0}.'.format(', '.join([c['name'] for c in categories])))
+    src_val, src_unit, target_unit = input('Please enter source value, source unit and unit to convert to [e.g. 100 m km]: ').split(' ')
     src_val = float(src_val)
 
     try:
@@ -94,7 +100,7 @@ def main():
     except UnsupportedUnitException as uue:
         print('Sorry. I don\'t know what {0} is.'.format(uue.unit))
     except DifferentUnitsException as due:
-        print('Sorry. These two units belong to different categories ({0} and {1}) and cannot be converted.'.format(due._cat1, due._cat2))
+        print('Sorry. These two units belong to different categories ({0} and {1}) and cannot be converted.'.format(due.cat1, due.cat2))
 
 if __name__ == '__main__':
     main()
