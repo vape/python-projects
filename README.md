@@ -19,3 +19,5 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 - [Calculator](https://github.com/vape/python-projects/blob/master/Numbers/09_Calculator/calc.py): A simple calculator to do basic operators. Make it a scientific calculator for added complexity.
 
 - [Unit Converter](https://github.com/vape/python-projects/blob/master/Numbers/10_UnitConverter/converter.py) (temp, currency, volume, mass and more): Converts various units between one another. The user enters the type of unit being entered, the type of unit they want to convert to and then the value. The program will then make the conversion.
+
+- [Alarm Clock](https://github.com/vape/python-projects/blob/master/Numbers/11_AlarmClock/alarmclock.py): A simple clock where it plays a sound after X number of minutes/seconds or at a particular time.
