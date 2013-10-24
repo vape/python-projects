@@ -4,8 +4,7 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 ### Numbers
 
-- [Find PI to the Nth Digit](https://github.com/vape/python-projects/blob/master/Numbers/01_Pi/pi.py): Enter a number and have the program generate PI up to that many decimal
-places. Keep a limit to how far the program will go.
+- [Find PI to the Nth Digit](https://github.com/vape/python-projects/blob/master/Numbers/01_Pi/pi.py): Enter a number and have the program generate PI up to that many decimal places. Keep a limit to how far the program will go.
 
 - [Fibonacci Sequence](https://github.com/vape/python-projects/blob/master/Numbers/02_Fibonacci/fibonacci.py): Enter a number and have the program generate the Fibonacci sequence to that number or to the Nth number. (I did it a little differently. See README of that solution for specifics.)
 
@@ -18,3 +17,5 @@ places. Keep a limit to how far the program will go.
 - [Change Return Program](https://github.com/vape/python-projects/blob/master/Numbers/07_ChangeCalculator/change.py): The user enters a cost and then the amount of money given. The program will figure out the change and the number of quarters, dimes, nickels, pennies needed for the change.
 
 - [Calculator](https://github.com/vape/python-projects/blob/master/Numbers/09_Calculator/calc.py): A simple calculator to do basic operators. Make it a scientific calculator for added complexity.
+
+- [Unit Converter](https://github.com/vape/python-projects/blob/master/Numbers/10_UnitConverter/converter.py) (temp, currency, volume, mass and more): Converts various units between one another. The user enters the type of unit being entered, the type of unit they want to convert to and then the value. The program will then make the conversion.
