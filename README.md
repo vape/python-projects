@@ -25,3 +25,5 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 - [Distance Between Two Cities](https://github.com/vape/python-projects/blob/master/Numbers/12_DistanceCalculator/distcalc.py): Calculates the distance between two cities and allows the user to specify a unit of distance. This program may require finding coordinates of the cities like latitude and longitude.
 
 - [Credit Card Validator](https://github.com/vape/python-projects/blob/master/Numbers/13_CreditCardValidator/validate.py): Takes in a credit card number of a common credit card vendor (Visa, Master-Card, American Express, Discoverer) and validates it to make sure that it is a valid number (look into how credit cards use a checksum).
+
+- [Dijkstra's Algorithm](https://github.com/vape/python-projects/blob/master/Numbers/14_DijkstrasAlgorithm/shortestpath.py): Create a program that finds the shortest path through a graph using its edges.
