@@ -21,3 +21,5 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 - [Unit Converter](https://github.com/vape/python-projects/blob/master/Numbers/10_UnitConverter/converter.py) (temp, currency, volume, mass and more): Converts various units between one another. The user enters the type of unit being entered, the type of unit they want to convert to and then the value. The program will then make the conversion.
 
 - [Alarm Clock](https://github.com/vape/python-projects/blob/master/Numbers/11_AlarmClock/alarmclock.py): A simple clock where it plays a sound after X number of minutes/seconds or at a particular time.
+
+- [Distance Between Two Cities](https://github.com/vape/python-projects/blob/master/Numbers/12_DistanceCalculator/distcalc.py): Calculates the distance between two cities and allows the user to specify a unit of distance. This program may require nding coordinates of the cities like latitude and longitude.
