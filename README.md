@@ -22,4 +22,6 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 - [Alarm Clock](https://github.com/vape/python-projects/blob/master/Numbers/11_AlarmClock/alarmclock.py): A simple clock where it plays a sound after X number of minutes/seconds or at a particular time.
 
-- [Distance Between Two Cities](https://github.com/vape/python-projects/blob/master/Numbers/12_DistanceCalculator/distcalc.py): Calculates the distance between two cities and allows the user to specify a unit of distance. This program may require nding coordinates of the cities like latitude and longitude.
+- [Distance Between Two Cities](https://github.com/vape/python-projects/blob/master/Numbers/12_DistanceCalculator/distcalc.py): Calculates the distance between two cities and allows the user to specify a unit of distance. This program may require finding coordinates of the cities like latitude and longitude.
+
+- [Credit Card Validator](https://github.com/vape/python-projects/blob/master/Numbers/13_CreditCardValidator/validate.py): Takes in a credit card number of a common credit card vendor (Visa, Master-Card, American Express, Discoverer) and validates it to make sure that it is a valid number (look into how credit cards use a checksum).

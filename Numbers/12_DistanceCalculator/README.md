@@ -1,8 +1,7 @@
 ### Distance Between Two Cities
 
 Calculates the distance between two cities and allows the user to specify a unit
-of distance. This program may require nding coordinates of the cities like lat-
-itude and longitude.
+of distance. This program may require finding coordinates of the cities like latitude and longitude.
 
 Note: I implemented this as a "Distance Between Two Addresses" utility. I'm using the
 [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/)
