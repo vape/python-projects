@@ -27,3 +27,6 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 - [Credit Card Validator](https://github.com/vape/python-projects/blob/master/Numbers/13_CreditCardValidator/validate.py): Takes in a credit card number of a common credit card vendor (Visa, Master-Card, American Express, Discoverer) and validates it to make sure that it is a valid number (look into how credit cards use a checksum).
 
 - [Dijkstra's Algorithm](https://github.com/vape/python-projects/blob/master/Numbers/14_DijkstrasAlgorithm/shortestpath.py): Create a program that finds the shortest path through a graph using its edges.
+
+- [Roman Numeral Converter](https://github.com/vape/python-projects/blob/master/Numbers/15_RomanNumeralConverter/roman.py): Create a program that converts a roman numeral to an integer. (I made this one up myself.)
+
