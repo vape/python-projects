@@ -30,3 +30,7 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 - [Roman Numeral Converter](https://github.com/vape/python-projects/blob/master/Numbers/15_RomanNumeralConverter/roman.py): Create a program that converts a roman numeral to an integer. (I made this one up myself.)
 
+### Numbers
+
+- [Pig Latin](https://github.com/vape/python-projects/blob/master/Text/01_PigLatin/piglatinize.py): Pig Latin is a game of alterations played on the English language game. To form the Pig Latin form of an English word the initial consonant sound is transposed to the end of the word and an ay is affixed.
+
