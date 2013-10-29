@@ -14,8 +14,8 @@ def pig_latinize(word):
 
 
 def main(argv):
-    txt = argv[1:] if len(argv) > 1 else input('Please enter text to pig-latinize: ')
-    print(' '.join(map(pig_latinize, [t for t in txt.split(' ') if t])))
+    txt = ' '.join(argv[1:]) if len(argv) > 1 else input('Please enter text to pig-latinize: ')
+    print(' '.join(map(pig_latinize, [t.lower() for t in txt.split(' ') if t])))
 
 
 if __name__ == '__main__':
