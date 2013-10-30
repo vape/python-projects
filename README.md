@@ -33,8 +33,8 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 ### Text
 
-- [Pig Latin](https://github.com/vape/python-projects/blob/master/Text/01_PigLatin/piglatinize.py): Pig Latin is a game of alterations played on the English language game. To form the Pig Latin form of an English word the initial consonant sound is transposed to the end of the word and an ay is affixed.
+- [Pig Latin](https://github.com/vape/python-projects/blob/master/Text/02_PigLatin/piglatinize.py): Pig Latin is a game of alterations played on the English language game. To form the Pig Latin form of an English word the initial consonant sound is transposed to the end of the word and an ay is affixed.
 
-- [Count Vowels](https://github.com/vape/python-projects/blob/master/Text/02_CountVowels/countvowels.py): Enter a string and the program counts the number of vowels in the text. For added complexity have it report a sum of each vowel found.
+- [Count Vowels](https://github.com/vape/python-projects/blob/master/Text/03_CountVowels/countvowels.py): Enter a string and the program counts the number of vowels in the text. For added complexity have it report a sum of each vowel found.
 
-- [Check if Palindrome](https://github.com/vape/python-projects/blob/master/Text/03_PalindromeDetect/palindrome.py): Checks if the string entered by the user is a palindrome. That is that it reads the same forwards as backwards like racecar.
+- [Check if Palindrome](https://github.com/vape/python-projects/blob/master/Text/04_PalindromeDetect/palindrome.py): Checks if the string entered by the user is a palindrome. That is that it reads the same forwards as backwards like racecar.
