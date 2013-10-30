@@ -1,4 +1,7 @@
 from collections import deque
+from itertools import repeat
+from math import ceil
+
 
 class CipherBase(object):
     def encrypt(self, text):
@@ -29,9 +32,33 @@ class CaesarCipher(CipherBase):
         return self._process(self.decrypt_dict, text)
 
 
-cip = CaesarCipher(letter='H')
+class VigenereCipher(CipherBase):
+    def __init__(self, keyword):
+        self.keyword = keyword
+        letters = list(set(self.keyword))
+        self.caesar_ciphers = {l: CaesarCipher(letter=l) for l in letters}
+
+    def _get_key(self, text):
+        return ''.join(repeat(self.keyword, ceil(len(text) / len(self.keyword))))[:len(text)]
+
+    def _process(self, text, op):
+        key = self._get_key(text)
+        return ''.join([getattr(self.caesar_ciphers[key[i]], op)(l) for i, l in enumerate(text.upper())])
+
+    def encrypt(self, text):
+        return self._process(text, 'encrypt')
+
+    def decrypt(self, text):
+        return self._process(text, 'decrypt')
+
+
+#cip = CaesarCipher(letter='H')
 #enc = cip.encrypt('THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG')
-dec = cip.decrypt('JHLZHY JPWOLYZ HYL LHZF AV IYLHR')
+#dec = cip.decrypt('JHLZHY JPWOLYZ HYL LHZF AV IYLHR')
 
 #print(enc)
-print(dec)
+#print(dec)
+
+vig = VigenereCipher('LEMON')
+print(vig.encrypt('ATTACKATDAWN'))
+print(vig.decrypt('LXFOPVEFRNHR'))
