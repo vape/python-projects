@@ -38,3 +38,5 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 - [Count Vowels](https://github.com/vape/python-projects/blob/master/Text/03_CountVowels/countvowels.py): Enter a string and the program counts the number of vowels in the text. For added complexity have it report a sum of each vowel found.
 
 - [Check if Palindrome](https://github.com/vape/python-projects/blob/master/Text/04_PalindromeDetect/palindrome.py): Checks if the string entered by the user is a palindrome. That is that it reads the same forwards as backwards like racecar.
+
+- [Ciphers](https://github.com/vape/python-projects/blob/master/Text/13_Ciphers/cipher.py): Functions for encrypting and decrypting data messages using Vigenere, Vernam and Caesar ciphers.
