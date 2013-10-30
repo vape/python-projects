@@ -50,15 +50,3 @@ class VigenereCipher(CipherBase):
 
     def decrypt(self, text):
         return self._process(text, 'decrypt')
-
-
-#cip = CaesarCipher(letter='H')
-#enc = cip.encrypt('THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG')
-#dec = cip.decrypt('JHLZHY JPWOLYZ HYL LHZF AV IYLHR')
-
-#print(enc)
-#print(dec)
-
-vig = VigenereCipher('LEMON')
-print(vig.encrypt('ATTACKATDAWN'))
-print(vig.decrypt('LXFOPVEFRNHR'))
