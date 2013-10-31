@@ -40,3 +40,9 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 - [Check if Palindrome](https://github.com/vape/python-projects/blob/master/Text/palindrome/palindrome.py): Checks if the string entered by the user is a palindrome. That is that it reads the same forwards as backwards like racecar.
 
 - [Ciphers](https://github.com/vape/python-projects/blob/master/Text/ciphers/cipher.py): Functions for encrypting and decrypting data messages using Vigenere, Vernam and Caesar ciphers.
+
+
+### Networking
+
+- [Port Scanner](https://github.com/vape/python-projects/blob/master/Networking/portscanner/portscanner.py): Enter an IP address and a port range where the program will then attempt to find open ports on the given computer by connecting to each of them. On any successful connections mark the port as open.
+
