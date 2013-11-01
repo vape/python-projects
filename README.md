@@ -46,3 +46,6 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 - [Port Scanner](https://github.com/vape/python-projects/blob/master/Networking/portscanner/portscanner.py): Enter an IP address and a port range where the program will then attempt to find open ports on the given computer by connecting to each of them. On any successful connections mark the port as open.
 
+### Classes
+
+- [Product Inventory](https://github.com/vape/python-projects/blob/master/Classes/productinventory/inventory.py): Create an application which manages an inventory of products. Create a product class which has a price, id, and quantity on hand. Then create an inventory class which keeps track of various products and can sum up the inventory value.
