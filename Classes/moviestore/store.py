@@ -1,6 +1,7 @@
 from Classes.utils import initializer
 from uuid import uuid4
-from datetime import datetime
+from datetime import datetime, timedelta
+from math import ceil
 
 
 class VideoAlreadyCheckedOutException(BaseException):
@@ -25,7 +26,7 @@ class Customer(object):
 
 class Video(object):
     @initializer(private=True)
-    def __init__(self, video_id, title):
+    def __init__(self, video_id, title, late_return_daily_penalty=5):
         self._checkout_date = None
         self._expected_return_date = None
 
@@ -48,6 +49,10 @@ class Video(object):
     @property
     def is_checked_out(self):
         return self._checkout_date and self._expected_return_date
+
+    @property
+    def late_return_daily_penalty(self):
+        return self._late_return_daily_penalty
 
     def check_out(self, co_date, exp_ret_date):
         if self.is_checked_out:
@@ -133,17 +138,18 @@ class MovieStore(object):
         self._transactions.append(trx)
         return trx
 
-    def _calculate_late_return_fee(self, video, actual_ret_date):
-        return 5
-
+    def _calculate_late_return_fee(self, video, exp_ret_date, actual_ret_date):
+        seconds_late = (actual_ret_date - exp_ret_date).total_seconds()
+        seconds_in_day = timedelta(days=1).total_seconds()
+        days_late = ceil(seconds_late / seconds_in_day)
+        return video.late_return_daily_penalty * days_late
 
     def return_video(self, video_id, return_date):
         vid = self.get_video(video_id)
         if not vid.is_checked_out:
             raise ValueError('Video with id {0} is not checked out.'.format(video_id))
 
-        late_return_fee = 0 if return_date <= vid.expected_return_date else self._calculate_late_return_fee(vid,
-                                                                                                            return_date)
+        late_return_fee = 0 if return_date <= vid.expected_return_date else self._calculate_late_return_fee(vid, vid.expected_return_date, return_date)
 
         vid.return_video()
         return late_return_fee

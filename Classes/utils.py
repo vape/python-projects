@@ -1,6 +1,7 @@
 from functools import wraps
 from inspect import getargspec
 
+
 def initializer(private=False):
     """
     Stolen from [http://stackoverflow.com/a/1389216/36938]
@@ -19,7 +20,7 @@ def initializer(private=False):
         names, varargs, keywords, defaults = getargspec(fun)
         @wraps(fun)
         def wrapper(self, *args):
-            for name, arg in zip(names[1:], args):
+            for name, arg in zip(names[1:], args + (defaults or ())):
                 setattr(self, '{0}{1}'.format('_' if private else '', name), arg)
             fun(self, *args)
         return wrapper

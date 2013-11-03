@@ -3,6 +3,7 @@ from Classes.moviestore.store import MovieStore, Customer, Video, Transaction
 from uuid import uuid4
 from datetime import datetime, timedelta
 
+
 class MovieStoreTests(TestCase):
     def setUp(self):
         self.s = MovieStore()
@@ -14,6 +15,7 @@ class MovieStoreTests(TestCase):
         self.s.add_video(Video(1, 'v1'))
         self.s.add_video(Video(2, 'v2'))
         self.s.add_video(Video(3, 'v3'))
+        self.s.add_video(Video(4, 'v4', 10))
 
     def test_add_customer(self):
         cust = self.s.add_customer('c1')
@@ -81,6 +83,37 @@ class MovieStoreTests(TestCase):
         ret_result = self.s.return_video(1, actual_return_date)
         self.assertEqual(ret_result, 0)
 
+    def test_return_video_late_incurs_late_return_fee(self):
+        cust1 = self.s.find_customer('Hugh Laurie')[0]
+        exp_return_date = datetime.now() + timedelta(days=3)
+        trx = self.s.checkout_video(1, cust1, exp_return_date)
+
+        actual_return_date = datetime.now() + timedelta(days=4)
+        ret_result = self.s.return_video(1, actual_return_date)
+        self.assertGreater(ret_result, 0)
+
+    def test_rest_late_return_fee_calculation_based_on_video_price(self):
+        cust1 = self.s.find_customer('Hugh Laurie')[0]
+        now = datetime.now()
+        exp_return_date = now + timedelta(days=3)
+        trx = self.s.checkout_video(1, cust1, exp_return_date)
+
+        actual_return_date = now + timedelta(days=4)
+        ret_result = self.s.return_video(1, actual_return_date)
+        self.assertEqual(ret_result, 5)
+
+        self.s.checkout_video(4, cust1, exp_return_date)
+        ret_result = self.s.return_video(4, actual_return_date)
+        self.assertEqual(ret_result, 10)
+
+    def test_late_return_fee_calculation_treats_partial_days_as_full_day(self):
+        cust1 = self.s.find_customer('Hugh Laurie')[0]
+        exp_return_date = datetime.now() + timedelta(days=3)
+        trx = self.s.checkout_video(1, cust1, exp_return_date)
+
+        actual_return_date = datetime.now() + timedelta(days=4, hours=2)
+        ret_result = self.s.return_video(1, actual_return_date)
+        self.assertEqual(ret_result, 10)
 
 
 
