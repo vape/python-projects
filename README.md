@@ -46,6 +46,22 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 - [Port Scanner](https://github.com/vape/python-projects/blob/master/Networking/portscanner/portscanner.py): Enter an IP address and a port range where the program will then attempt to find open ports on the given computer by connecting to each of them. On any successful connections mark the port as open.
 
+
 ### Classes
 
 - [Product Inventory](https://github.com/vape/python-projects/blob/master/Classes/productinventory/inventory.py): Create an application which manages an inventory of products. Create a product class which has a price, id, and quantity on hand. Then create an inventory class which keeps track of various products and can sum up the inventory value.
+
+- [Movie Store](https://github.com/vape/python-projects/blob/master/Classes/moviestore/store.py): Manage video rentals and controls when videos are checked out, due to return, overdue fees and for added complexity create a summary of those accounts which are overdue for contact.
+
+- [Josephus Problem](https://github.com/vape/python-projects/blob/master/Classes/josephusproblem/josephus.py): Create a program which links together various node objects and then every Nth object is removed until you have one object left. This last object is the sole survivor.
+
+
+### Threading
+
+- [Download Progress Bar](https://github.com/vape/python-projects/blob/master/Threading/dlprogress/progress.py): Create a progress bar for applications that can keep track of a download in progress. The progress bar will be on a separate thread and will communicate with the main thread using delegates.
+
+- [Download Manager](https://github.com/vape/python-projects/blob/master/Threading/dlmanager/manager.py): Allow your program to download various files and each one is downloading in the background on a separate thread. The main thread will keep track of the other threads progress and notify the user when downloads are completed.
+
+- [Bulk Thumbnail Creator](https://github.com/vape/python-projects/blob/master/Threading/thumbnailcreator/thumb.py): Create an image program which can take hundreds of images and convert them to a specifed size in the background thread while you do other things.
+
+
