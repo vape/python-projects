@@ -65,3 +65,6 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 - [Bulk Thumbnail Creator](https://github.com/vape/python-projects/blob/master/Threading/thumbnailcreator/thumb.py): Create an image program which can take hundreds of images and convert them to a specifed size in the background thread while you do other things.
 
 
+### Web
+
+- [Page Scraper](https://github.com/vape/python-projects/blob/master/Web/pagescraper/scraper.py): Create an application which connects to a site and pulls out all links or images and saves them to a list. For added complexity, organize the indexed content and don't allow duplicates. Have it put the results into an easily searchable index file.
