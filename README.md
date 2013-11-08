@@ -68,3 +68,9 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 ### Web
 
 - [Page Scraper](https://github.com/vape/python-projects/blob/master/Web/pagescraper/scraper.py): Create an application which connects to a site and pulls out all links or images and saves them to a list. For added complexity, organize the indexed content and don't allow duplicates. Have it put the results into an easily searchable index file.
+
+
+### Games
+
+- [Hangman](https://github.com/vape/python-projects/blob/master/Games/hangman/hangman.py): Randomly select a word from a file, have the user guess characters in the word. For each character they guess that is not in the word, have it draw another part of a man hanging in a noose. If the picture is completed before they guess all the characters, they lose.
+
