@@ -30,6 +30,7 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 - [Roman Numeral Converter](https://github.com/vape/python-projects/blob/master/Numbers/romannumerals/roman.py): Create a program that converts a roman numeral to an integer. (I made this one up myself.)
 
+- [Number Names](https://github.com/vape/python-projects/blob/master/Numbers/numbernames/numbernames.py) - Show how to spell out a number in English. You can use a preexisting implementation or roll your own, but you should support inputs up to at least one million (or the maximum value of your language's default bounded integer type, if that's less)
 
 ### Text
 
