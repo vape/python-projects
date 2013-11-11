@@ -75,3 +75,7 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 - [Hangman](https://github.com/vape/python-projects/blob/master/Games/hangman/hangman.py): Randomly select a word from a file, have the user guess characters in the word. For each character they guess that is not in the word, have it draw another part of a man hanging in a noose. If the picture is completed before they guess all the characters, they lose.
 
+
+### Data Structures:
+
+- [Inverted index](https://github.com/vape/python-projects/blob/master/DataStructures/invertedindex/invertedindex.py): An [Inverted Index](http://en.wikipedia.org/wiki/Inverted_index) is a data structure used to create full text search. Given a set of text files, implement a program to create an inverted index. Also create a user interface to do a search using that inverted index which returns a list of files that contain the query term / terms. The search index can be in memory.
