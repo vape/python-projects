@@ -41,5 +41,5 @@ if __name__ == '__main__':
 
     rl = list(range(-10, 100))
     shuffle(rl)
-    bubble_sort(rl)
     print(rl)
+    bubble_sort(rl)
