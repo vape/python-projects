@@ -30,6 +30,7 @@ class Cell(Canvas):
 
 class SnakeBoard(object):
     directions = {'UP': [0, -1], 'DOWN': [0, 1], 'LEFT': [-1, 0], 'RIGHT': [1, 0]}
+    key_bindings = {38: 'UP', 87: 'UP', 83: 'DOWN', 40: 'DOWN', 39: 'RIGHT', 68: 'RIGHT', 37: 'LEFT', 65: 'LEFT'}
     cell_count = 10
     board_size = 500
     cell_dim = board_size // cell_count
@@ -39,6 +40,7 @@ class SnakeBoard(object):
     def __init__(self, master):
         self._master = master
         self._master.geometry('{0}x{0}'.format(self.board_size))
+        self._bind_keys()
         self._direction = choice(list(self.directions.keys()))
         print('dir: ', self._direction)
         self._head_pos = (choice(range(self.cell_count//4, self.cell_count//2)), choice(range(self.cell_count//4, self.cell_count//2)))
@@ -57,13 +59,21 @@ class SnakeBoard(object):
         self._is_running = True
         self._advance()
 
+    def _bind_keys(self):
+        self._master.bind("<Key>", self._kb_click)
+
+    def _kb_click(self, event):
+        if not event.keycode or event.keycode not in self.key_bindings:
+            return
+        self._direction = self.key_bindings[event.keycode]
+
     def _cell_at(self, coord):
         return self._board[coord[0]][coord[1]]
 
     def _advance(self):
         if not self._is_running:
             return
-        new_head_coord = (self._head_pos[0] + self.directions[self._direction][0], self._head_pos[1] + self.directions[self._direction][1])
+        new_head_coord = (self._head_pos[0] + self.directions[self._direction][1], self._head_pos[1] + self.directions[self._direction][0])
         end_cell_coord = self._snake_cells.pop(0)
         if new_head_coord[0] < 0 or new_head_coord[0] >= self.cell_count or new_head_coord[1] < 0 or new_head_coord[1] > self.cell_count:
             print('game over!')
