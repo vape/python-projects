@@ -59,41 +59,59 @@ class SnakeGame(object):
     refresh_rate = 1000 // game_fps
 
     def __init__(self, master):
+        self._status = GameStatus.UNINITIALIZED
         self._master = master
-        self._master.geometry('{0}x{1}'.format(self.board_size+100, self.board_size+self.control_panel_height+100))
+        self._init_master()
         self._bind_keys()
+        self._init_direction()
+        self._init_score()
+        board_frame = self._init_board_frame()
+        self._board = [[Cell(board_frame, r, c, self.cell_dim, 'EMPTY') for c in range(self.cell_count)] for r in range(self.cell_count)]
+        self._init_snake_and_food()
+        self._init_ui()
+
+    def _init_master(self):
+        self._master.geometry('{0}x{1}'.format(self.board_size+70, self.board_size+self.control_panel_height+50))
+
+    def _init_direction(self):
         self._direction = choice(list(self.directions.keys()))
         self._next_direction = copy(self._direction)
-        self._status = GameStatus.UNINITIALIZED
+
+    def _init_score(self):
         self._score = 0
         self._level = 1
-        board_frame = Frame(self._master, height=self.board_size, width=self.board_size)
-        board_frame.grid(row=0, column=0)
-        board_frame.pack()
-
-        game_control_frame = Frame(self._master, height=self.control_panel_height, width=self.board_size)
-        game_control_frame.grid(row=1, column=0)
-        game_control_frame.pack()
-        new_game_button = Button(game_control_frame, text='New Game')
-        new_game_button.grid(row=0, column=0)
-        pause_game_button = Button(game_control_frame, text='Pause', command=self._pause_click)
-        pause_game_button.grid(row=0, column=1)
-        score_label = Label(game_control_frame, text='Score: ')
-        score_label.grid(row=0, column=2)
         self._score_var = IntVar(self._master, self._score)
-        score_value_label = Label(game_control_frame, textvariable=self._score_var)
-        score_value_label.grid(row=0, column=3)
-        level_label = Label(game_control_frame, text='Level: ')
-        level_label.grid(row=0, column=4)
         self._level_var = IntVar(self._master, self._level)
-        level_value_label = Label(game_control_frame, textvariable=self._level_var)
-        level_value_label.grid(row=0, column=5)
-        self._board = [[Cell(board_frame, r, c, self.cell_dim, 'EMPTY') for c in range(self.cell_count)] for r in range(self.cell_count)]
+
+    def _init_snake_and_food(self):
         self._head_pos = (choice(range(self.cell_count//4, self.cell_count//2)), choice(range(self.cell_count//4, self.cell_count//2)))
         self._cell_at(self._head_pos).fill()
         self._snake_cells = [self._head_pos]
         self._food_pos = self._get_food_pos()
         self._cell_at(self._food_pos).food()
+
+    def _init_board_frame(self):
+        board_frame = Frame(self._master, height=self.board_size, width=self.board_size)
+        board_frame.grid(row=0, column=0)
+        board_frame.pack()
+        return board_frame
+
+    def _init_ui(self):
+        game_control_frame = Frame(self._master, height=self.control_panel_height, width=self.board_size)
+        game_control_frame.grid(row=1, column=0)
+        game_control_frame.pack()
+        new_game_button = Button(game_control_frame, text='New Game', command=self._new_game_click)
+        new_game_button.grid(row=0, column=0)
+        pause_game_button = Button(game_control_frame, text='Pause', command=self._pause_click)
+        pause_game_button.grid(row=0, column=1)
+        score_label = Label(game_control_frame, text='Score: ')
+        score_label.grid(row=0, column=2)
+        score_value_label = Label(game_control_frame, textvariable=self._score_var)
+        score_value_label.grid(row=0, column=3)
+        level_label = Label(game_control_frame, text='Level: ')
+        level_label.grid(row=0, column=4)
+        level_value_label = Label(game_control_frame, textvariable=self._level_var)
+        level_value_label.grid(row=0, column=5)
 
     def start_game(self):
         self._status = GameStatus.RUNNING
@@ -107,7 +125,6 @@ class SnakeGame(object):
         self._master.bind("<Key>", self._kb_click)
 
     def _kb_click(self, event):
-        print(event.keycode)
         if not event.keycode or event.keycode not in self.key_bindings:
             return
         if self.key_bindings[event.keycode] == 'PAUSE':
@@ -151,6 +168,15 @@ class SnakeGame(object):
         self._status = GameStatus.PAUSED if self._status == GameStatus.RUNNING else GameStatus.RUNNING
         if self._status == GameStatus.RUNNING:
             self._advance()
+
+    def _new_game_click(self):
+        if self._status in (GameStatus.RUNNING, GameStatus.PAUSED):
+            return
+        self._init_score()
+        [[c.empty() for c in r] for r in self._board]
+        self._init_snake_and_food()
+        self._init_direction()
+        self.start_game()
 
     def _advance(self):
         if self._status != GameStatus.RUNNING:
