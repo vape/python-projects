@@ -3,6 +3,13 @@ from random import choice
 from copy import copy
 
 
+def enum(name, *sequential, **named):
+    values = dict(zip(sequential, range(len(sequential))), **named)
+    return type(name, (), values)
+
+GameStatus = enum('GameStatus', UNINITIALIZED=0, RUNNING=1, PAUSED=2, OVER=3)
+
+
 class Cell(Canvas):
     _cell_status = {'EMPTY': 0, 'FULL': 1, 'FOOD': 2}
     _cell_fill = {0: 'black', 1: 'green', 2: 'yellow'}
@@ -41,7 +48,7 @@ class Cell(Canvas):
 
 class SnakeGame(object):
     directions = {'UP': [0, -1], 'DOWN': [0, 1], 'LEFT': [-1, 0], 'RIGHT': [1, 0]}
-    key_bindings = {38: 'UP', 87: 'UP', 83: 'DOWN', 40: 'DOWN', 39: 'RIGHT', 68: 'RIGHT', 37: 'LEFT', 65: 'LEFT'}
+    key_bindings = {38: 'UP', 87: 'UP', 83: 'DOWN', 40: 'DOWN', 39: 'RIGHT', 68: 'RIGHT', 37: 'LEFT', 65: 'LEFT', 32: 'PAUSE'}
     statuses = ['RUNNING', 'PAUSED', 'OVER']
     cell_count = 10
     board_size = 500
@@ -57,7 +64,7 @@ class SnakeGame(object):
         self._bind_keys()
         self._direction = choice(list(self.directions.keys()))
         self._next_direction = copy(self._direction)
-        self._is_running = False
+        self._status = GameStatus.UNINITIALIZED
         self._score = 0
         self._level = 1
         board_frame = Frame(self._master, height=self.board_size, width=self.board_size)
@@ -69,7 +76,7 @@ class SnakeGame(object):
         game_control_frame.pack()
         new_game_button = Button(game_control_frame, text='New Game')
         new_game_button.grid(row=0, column=0)
-        pause_game_button = Button(game_control_frame, text='Pause')
+        pause_game_button = Button(game_control_frame, text='Pause', command=self._pause_click)
         pause_game_button.grid(row=0, column=1)
         score_label = Label(game_control_frame, text='Score: ')
         score_label.grid(row=0, column=2)
@@ -89,14 +96,24 @@ class SnakeGame(object):
         self._cell_at(self._food_pos).food()
 
     def start_game(self):
-        self._is_running = True
+        self._status = GameStatus.RUNNING
         self._advance()
+
+    @property
+    def _is_running(self):
+        return self._status == GameStatus.RUNNING
 
     def _bind_keys(self):
         self._master.bind("<Key>", self._kb_click)
 
     def _kb_click(self, event):
+        print(event.keycode)
         if not event.keycode or event.keycode not in self.key_bindings:
+            return
+        if self.key_bindings[event.keycode] == 'PAUSE':
+            self._pause_click()
+            return
+        if not self._is_running:
             return
         if -self.directions[self._direction][0] == self.directions[self.key_bindings[event.keycode]][0] or -self.directions[self._direction][1] == self.directions[self.key_bindings[event.keycode]][1]:
             return
@@ -128,19 +145,26 @@ class SnakeGame(object):
         self._score += 1
         self._score_var.set(self._score)
 
+    def _pause_click(self):
+        if self._status not in (GameStatus.RUNNING, GameStatus.PAUSED):
+            return
+        self._status = GameStatus.PAUSED if self._status == GameStatus.RUNNING else GameStatus.RUNNING
+        if self._status == GameStatus.RUNNING:
+            self._advance()
+
     def _advance(self):
-        if not self._is_running:
+        if self._status != GameStatus.RUNNING:
             return
 
         self._direction = copy(self._next_direction)
         new_head_coord = (self._head_pos[0] + self.directions[self._direction][1], self._head_pos[1] + self.directions[self._direction][0])
         if new_head_coord[0] < 0 or new_head_coord[0] >= self.cell_count or new_head_coord[1] < 0 or new_head_coord[1] > self.cell_count:
             print('game over! hit wall')
-            self._is_running = False
+            self._status = GameStatus.OVER
             return
         if new_head_coord in self._snake_cells:
             print('game over! hit self')
-            self._is_running = False
+            self._status = GameStatus.OVER
             return
 
         ate_food = new_head_coord == self._food_pos
@@ -157,7 +181,7 @@ class SnakeGame(object):
             self._cell_at(end_cell_coord).empty()
 
         self._head_pos = new_head_coord
-        if self._is_running:
+        if self._status == GameStatus.RUNNING:
             self._master.after(self.refresh_rate, self._advance)
 
     def __str__(self):
