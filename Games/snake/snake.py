@@ -1,5 +1,6 @@
 from tkinter import *
 from random import choice
+from copy import copy
 
 
 class Cell(Canvas):
@@ -44,18 +45,43 @@ class SnakeGame(object):
     statuses = ['RUNNING', 'PAUSED', 'OVER']
     cell_count = 10
     board_size = 500
+    control_panel_height=30
     cell_dim = board_size // cell_count
     game_fps = 3
+    max_level = 10
     refresh_rate = 1000 // game_fps
 
     def __init__(self, master):
         self._master = master
-        self._master.geometry('{0}x{0}'.format(self.board_size))
+        self._master.geometry('{0}x{1}'.format(self.board_size+100, self.board_size+self.control_panel_height+100))
         self._bind_keys()
         self._direction = choice(list(self.directions.keys()))
+        self._next_direction = copy(self._direction)
         self._is_running = False
         self._score = 0
-        self._board = [[Cell(self._master, r, c, self.cell_dim, 'EMPTY') for c in range(self.cell_count)] for r in range(self.cell_count)]
+        self._level = 1
+        board_frame = Frame(self._master, height=self.board_size, width=self.board_size)
+        board_frame.grid(row=0, column=0)
+        board_frame.pack()
+
+        game_control_frame = Frame(self._master, height=self.control_panel_height, width=self.board_size)
+        game_control_frame.grid(row=1, column=0)
+        game_control_frame.pack()
+        new_game_button = Button(game_control_frame, text='New Game')
+        new_game_button.grid(row=0, column=0)
+        pause_game_button = Button(game_control_frame, text='Pause')
+        pause_game_button.grid(row=0, column=1)
+        score_label = Label(game_control_frame, text='Score: ')
+        score_label.grid(row=0, column=2)
+        self._score_var = IntVar(self._master, self._score)
+        score_value_label = Label(game_control_frame, textvariable=self._score_var)
+        score_value_label.grid(row=0, column=3)
+        level_label = Label(game_control_frame, text='Level: ')
+        level_label.grid(row=0, column=4)
+        self._level_var = IntVar(self._master, self._level)
+        level_value_label = Label(game_control_frame, textvariable=self._level_var)
+        level_value_label.grid(row=0, column=5)
+        self._board = [[Cell(board_frame, r, c, self.cell_dim, 'EMPTY') for c in range(self.cell_count)] for r in range(self.cell_count)]
         self._head_pos = (choice(range(self.cell_count//4, self.cell_count//2)), choice(range(self.cell_count//4, self.cell_count//2)))
         self._cell_at(self._head_pos).fill()
         self._snake_cells = [self._head_pos]
@@ -72,7 +98,9 @@ class SnakeGame(object):
     def _kb_click(self, event):
         if not event.keycode or event.keycode not in self.key_bindings:
             return
-        self._direction = self.key_bindings[event.keycode]
+        if -self.directions[self._direction][0] == self.directions[self.key_bindings[event.keycode]][0] or -self.directions[self._direction][1] == self.directions[self.key_bindings[event.keycode]][1]:
+            return
+        self._next_direction = self.key_bindings[event.keycode]
 
     def _cell_at(self, coord):
         return self._board[coord[0]][coord[1]]
@@ -82,13 +110,36 @@ class SnakeGame(object):
         [[flat_cells.append(c.pos()) for c in r] for r in self._board]
         return choice(list(set(flat_cells) - set(self._snake_cells)))
 
+    def _reset_level(self):
+        self._level = 1
+        self._level_var.set(self._level)
+
+    def _increment_level(self):
+        self._level += 1
+        self._level_var.set(self._level)
+        self.game_fps += self._level // 2
+        self.refresh_rate = 1000 // self.game_fps
+
+    def _reset_score(self):
+        self._score = 0
+        self._score_var.set(self._score)
+
+    def _increment_score(self):
+        self._score += 1
+        self._score_var.set(self._score)
+
     def _advance(self):
         if not self._is_running:
             return
 
+        self._direction = copy(self._next_direction)
         new_head_coord = (self._head_pos[0] + self.directions[self._direction][1], self._head_pos[1] + self.directions[self._direction][0])
         if new_head_coord[0] < 0 or new_head_coord[0] >= self.cell_count or new_head_coord[1] < 0 or new_head_coord[1] > self.cell_count:
-            print('game over!')
+            print('game over! hit wall')
+            self._is_running = False
+            return
+        if new_head_coord in self._snake_cells:
+            print('game over! hit self')
             self._is_running = False
             return
 
@@ -96,9 +147,11 @@ class SnakeGame(object):
         self._snake_cells.append(new_head_coord)
         self._cell_at(new_head_coord).fill()
         if ate_food:
-            self._score += 1
+            self._increment_score()
             self._food_pos = self._get_food_pos()
             self._cell_at(self._food_pos).food()
+            if self._score / self.max_level > self._level:
+                self._increment_level()
         else:
             end_cell_coord = self._snake_cells.pop(0)
             self._cell_at(end_cell_coord).empty()
