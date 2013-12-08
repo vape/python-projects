@@ -42,6 +42,8 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 - [Ciphers](https://github.com/vape/python-projects/blob/master/Text/ciphers/cipher.py): Functions for encrypting and decrypting data messages using Vigenere, Vernam and Caesar ciphers.
 
+- [String to Periodic Table](https://github.com/vape/python-projects/blob/master/Text/elements/elements.py): Find element abbreviations in a given text so it can be written like the [Breaking Bad logo](http://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Breaking_Bad_logo.svg/369px-Breaking_Bad_logo.svg.png).
+
 
 ### Networking
 
