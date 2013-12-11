@@ -32,6 +32,9 @@ My attempt at implementing the projects [over here](http://www.dreamincode.net/f
 
 - [Number Names](https://github.com/vape/python-projects/blob/master/Numbers/numbernames/numbernames.py) - Show how to spell out a number in English. You can use a preexisting implementation or roll your own, but you should support inputs up to at least one million (or the maximum value of your language's default bounded integer type, if that's less)
 
+- [Happy Numbers](https://github.com/vape/python-projects/blob/master/Numbers/happynumbers/happynumbers.py) - A happy number is defined by the following process. Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers, while those that do not end in 1 are unhappy numbers. Take an input number from user, and find first 8 happy numbers from that input.
+
+
 ### Text
 
 - [Pig Latin](https://github.com/vape/python-projects/blob/master/Text/piglatin/piglatinize.py): Pig Latin is a game of alterations played on the English language game. To form the Pig Latin form of an English word the initial consonant sound is transposed to the end of the word and an ay is affixed.
